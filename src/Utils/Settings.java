@@ -1,6 +1,20 @@
 package Utils;
+import DefaultClasses.*;
+
+import java.util.HashMap;
 
 public class Settings {
+
+
+    /*   Map   */
+    private static byte map_length = 2;
+    private static byte map_width = 2;
+
+    private static Node[][] map_double_arr_matrix = new Node[map_width][map_length];
+    private static HashMap<String, Node> map_nodes_hashmap = new HashMap<>();
+    public static HashMap<String, Node> getMap_nodes_hashmap() {return map_nodes_hashmap;}
+    public static Node[][] getMap_double_arr_matrix() {return map_double_arr_matrix;}
+
 
     /*   Emojies   */
     private static final String emoji_tree = "\uD83C\uDF34";
@@ -37,4 +51,6 @@ public class Settings {
     public static String getEmoji_rock() { return emoji_rock; }
     public static String getEmoji_grass() {return emoji_grass;}
     public static String getEmoji_bear() {return emoji_bear;}
+    public static byte getMap_length() {return map_length;}
+    public static byte getMap_width() {return map_width;}
 }

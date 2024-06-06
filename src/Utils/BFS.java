@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class BFS {
     public static void iteration(Node p_node) {
-        System.out.println("Current Node: "+ p_node.getValue());
+        //System.out.println("Current Node: "+ p_node.getValue());
 
         HashSet<Node> set_passed = new HashSet<>();
         LinkedList<Node> queue = new LinkedList<>();

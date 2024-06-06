@@ -2,9 +2,9 @@ package GameClasses;
 
 abstract public class Creature extends Entity{
      private int hp;
-
-
      private int speed;
+
+
 
      public int getHp() {
           return hp;

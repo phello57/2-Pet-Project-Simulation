@@ -2,8 +2,11 @@
 import Utils.*;
 import GameClasses.*;
 import DefaultClasses.*;
+import jdk.jshell.execution.Util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,26 +15,28 @@ public class Main {
         Tree tree = new Tree();
         Predator bear = new Bear();
 
-        System.out.println(grass.getEmoji());
-        System.out.println(rock.getEmoji());
-        System.out.println(tree.getEmoji());
-        System.out.println(bear.getEmoji());
+//        Node node0 = new Node(1, grass);
+//        Node node1 = new Node(2, rock);
+//        Node node2 = new Node(3, tree);
+//        Node node3 = new Node(4, grass);
+//
+//        Node[][] node_file = new Node[][]{
+//                {node0, node1}
+//                ,{node2, node3}
+//        };
+//
+//        int i = 0;
 
-        int[][] file = new int[][]{
-                {1, 2, 0}
-                , {2, 3, 0}
-                , {2, 4, 0}
-                , {4, 9, 0}
-                , {4, 10, 0}
-
-                , {1, 5, 0}
-                , {5, 6, 0}
-                , {6, 7, 0}
-                , {6, 8, 0}
-                , {7, 8, 0}
-
-        };
-
-        HashMap<Integer, Node> main_hash = Graph.create(file);
+        Utils.Map.create();
+        for (Node[] arr : Settings.getMap_double_arr_matrix()) {
+            System.out.println();
+            for (Node node : arr) {
+                System.out.print(node);
+            }
+        }
+        HashMap<String, Node> hashmap = Settings.getMap_nodes_hashmap();
+        for (java.util.Map.Entry<String, Node> entry : hashmap.entrySet()) {
+            System.out.println(entry.getKey());
+        }
     }
 }
