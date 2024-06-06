@@ -4,11 +4,11 @@ import GameClasses.Entity;
 import java.util.LinkedHashSet;
 
 public class Node {
-    private byte x;
-    private byte y;
+    private byte w;
+    private byte l;
 
-    public int getX() {return x;}
-    public int getY() {return y;}
+    public int getW() {return w;}
+    public int getL() {return l;}
 
     private Entity entity;
     private LinkedHashSet<Edge> edges;
@@ -29,16 +29,16 @@ public class Node {
     public Entity getEntity() {return entity;}
     public void setEntity(Entity entity) {this.entity = entity;}
 
-    public Node(byte x, byte y) {
+    public Node(byte w, byte l) {
         this.edges = new LinkedHashSet<>();
-        this.x = x;
-        this.y = y;
+        this.w = w;
+        this.l = l;
     }
 
-    public Node(byte x, byte y, Entity entity) {
+    public Node(byte w, byte l, Entity entity) {
         this.edges = new LinkedHashSet<>();
-        this.x = x;
-        this.y = y;
+        this.w = w;
+        this.l = l;
         this.entity = entity;
     }
 

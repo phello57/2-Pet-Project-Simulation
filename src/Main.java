@@ -28,15 +28,16 @@ public class Main {
 //        int i = 0;
 
         Utils.Map.create();
+
         for (Node[] arr : Settings.getMap_double_arr_matrix()) {
             System.out.println();
             for (Node node : arr) {
                 System.out.print(node);
             }
         }
-        HashMap<String, Node> hashmap = Settings.getMap_nodes_hashmap();
-        for (java.util.Map.Entry<String, Node> entry : hashmap.entrySet()) {
-            System.out.println(entry.getKey());
-        }
+//        HashMap<String, Node> hashmap = Settings.getMap_nodes_hashmap();
+//        for (java.util.Map.Entry<String, Node> entry : hashmap.entrySet()) {
+//            System.out.println(entry.getKey());
+//        }
     }
 }

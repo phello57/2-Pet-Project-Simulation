@@ -28,30 +28,33 @@ public class Map {
 
         for (byte wid = 0; wid < s_width; wid++) {  // count []
             for (byte len = 0; len < s_length; len++) { // index
+                System.out.println(wid+"___"+len);
                 create_edges(wid, len, s_matrix[wid][len], s_matrix);
             }
         }
     }
 
-    private static void create(byte p_w, byte p_l, Node[][] p_matrix, Node parent_node) {
-        if ( (p_l >= 0 && p_matrix[0].length >= p_l)
-             && (p_w >= 0 && p_matrix.length >= p_w)
+    private static void create(int p_w, int p_l, Node[][] p_matrix, Node parent_node) {
+        if ( (p_l >= 0 && p_matrix[0].length > p_l)
+             && (p_w >= 0 && p_matrix.length > p_w)
+//             && (p_w != parent_node.getW() && p_l != parent_node.getL())
         ) {
+
             parent_node.getEdges().add(new Edge(p_matrix[p_w][p_l]));
-            System.out.println("edge: "+p_l+"_"+p_w);
+            System.out.println("from: "+parent_node.getW()+"_"+parent_node.getL()+" to "+p_l+"_"+p_w);
         }
     }
 
-    private static void create_edges(byte p_w, byte p_l, Node p_node, Node[][] p_matrix) {
+    private static void create_edges(int p_w, int p_l, Node p_node, Node[][] p_matrix) {
 
-        create(p_w--, p_l--, p_matrix, p_node); // верх лево
-        create(p_w--, p_l, p_matrix, p_node);   // центр верх
-        create(p_w--, p_l++, p_matrix, p_node); // верх право
-        create(p_w, p_l--, p_matrix, p_node);     // центр лево
-        create(p_w, p_l++, p_matrix, p_node); // центр право
-        create(p_w++, p_l--, p_matrix, p_node); // лево низ
-        create(p_w++, p_l, p_matrix, p_node); // центр низ
-        create(p_w++, p_l++, p_matrix, p_node); // право низ
+        create(p_w - 1, p_l - 1 , p_matrix, p_node); // верх лево
+        create(p_w - 1, p_l         , p_matrix, p_node);   // центр верх
+        create(p_w - 1, p_l + 1 , p_matrix, p_node); // верх право
+        create(p_w, p_l - 1          , p_matrix, p_node);     // центр лево
+        create(p_w, p_l + 1, p_matrix, p_node); // центр право
+        create(p_w + 1, p_l - 1, p_matrix, p_node); // лево низ
+        create(p_w + 1, p_l, p_matrix, p_node); // центр низ
+        create(p_w + 1, p_l+ 1, p_matrix, p_node); // право низ
 
     }
 }
