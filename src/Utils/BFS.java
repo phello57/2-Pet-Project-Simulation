@@ -3,6 +3,7 @@ import DefaultClasses.*;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import GameClasses.*;
 
 public class BFS {
     public static void iteration(Node p_node) {
@@ -15,6 +16,13 @@ public class BFS {
 
         while(!queue.isEmpty()) {
             Node node = queue.removeFirst();
+            try {
+                if (node.getEntity().getClass() == Pig.class) {
+                    System.out.println();
+                    System.out.println("PIG DETECTED");
+                    System.out.println(node.getW()+" "+node.getL());
+                }
+            } catch (NullPointerException e) {}
 
             for (Edge edge : node.getEdges()) {
                 Node pointer_node = edge.getPointerNode();
@@ -25,6 +33,7 @@ public class BFS {
             }
         }
     }
+
     public static PathNode findShortestPath(Node p_start_node, Node p_end_node) {
         HashSet<Node> set_passed = new HashSet<>();
         LinkedList<PathNode> queue = new LinkedList<>();

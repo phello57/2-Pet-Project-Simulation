@@ -1,6 +1,8 @@
 package DefaultClasses;
 
 import GameClasses.Entity;
+import Utils.Settings;
+
 import java.util.LinkedHashSet;
 
 public class Node {
@@ -44,6 +46,9 @@ public class Node {
 
     @Override
     public String toString() {
+        if (this.getEntity() == null) {
+            return Settings.getEmoji_void();
+        }
         return this.getEntity().getEmoji();
     }
 }

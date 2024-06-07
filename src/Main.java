@@ -14,30 +14,24 @@ public class Main {
         Rock rock = new Rock();
         Tree tree = new Tree();
         Predator bear = new Bear();
+        Pig sheep = new Pig();
 
-//        Node node0 = new Node(1, grass);
-//        Node node1 = new Node(2, rock);
-//        Node node2 = new Node(3, tree);
-//        Node node3 = new Node(4, grass);
-//
-//        Node[][] node_file = new Node[][]{
-//                {node0, node1}
-//                ,{node2, node3}
-//        };
-//
-//        int i = 0;
 
         Utils.Map.create();
-
+        Settings.getMap_double_arr_matrix()[0][3].setEntity(bear);
+        Settings.getMap_double_arr_matrix()[0][18].setEntity(sheep);
         for (Node[] arr : Settings.getMap_double_arr_matrix()) {
             System.out.println();
             for (Node node : arr) {
                 System.out.print(node);
             }
         }
-//        HashMap<String, Node> hashmap = Settings.getMap_nodes_hashmap();
-//        for (java.util.Map.Entry<String, Node> entry : hashmap.entrySet()) {
-//            System.out.println(entry.getKey());
-//        }
+        BFS.iteration(Settings.getMap_double_arr_matrix()[0][3]);
+        PathNode end = BFS.findShortestPath( Settings.getMap_double_arr_matrix()[0][3]
+                            , Settings.getMap_double_arr_matrix()[0][18]);
+        while (end.pathNode != null) {
+            System.out.println(end.node.getW()+"_"+end.node.getL());
+            end = end.pathNode;
+        }
     }
 }
