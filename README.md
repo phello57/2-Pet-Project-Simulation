@@ -4,6 +4,7 @@
 ![image](https://github.com/phello57/2-Pet-Project-Simulation/assets/103268341/0439ee85-7f1d-428e-9f8b-1b8c44211550)
 
 В каждой ячейке двумерного массива лежат Node
+
 Точка - Entity в ноде пустая
 
 Ноды связаны Edge со всеми Node вокруг него
