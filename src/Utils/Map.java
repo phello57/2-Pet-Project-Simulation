@@ -60,9 +60,9 @@ public class Map {
 
     }
 
-    public static void do_steps(Entity p_creature) {
-        PathNode goalNode = Settings.getMap_list_goals().get(p_creature);
-        int i_count_steps = ((Creature) (p_creature)).getSteps();
+    public static void do_steps(Entity p_entity) {
+        PathNode goalNode = Settings.getMap_list_goals().get(p_entity);
+        int i_count_steps = ((Creature) (p_entity)).getSteps();
 
         while (i_count_steps != 0 ) {
             PathNode endNode = goalNode;
@@ -73,15 +73,30 @@ public class Map {
                 }
             } catch (NullPointerException e) {
                 endNode.getPathNode().getNode().setEntity(null);
-                endNode.getNode().setEntity(p_creature);
+                endNode.getNode().setEntity(p_entity);
             }
 
 
             endNode.setPathNode(null);
-            endNode.getNode().setEntity(p_creature);
+            endNode.getNode().setEntity(p_entity);
             i_count_steps -= 1;
         }
     }
+    public static void do_attack(Entity p_entity) {
+        PathNode goalNode = Settings.getMap_list_goals().get(p_entity);
+        // проверка что жертва не убежала
+
+        int i_count_steps = ((Creature) (p_entity)).getSteps();
+        int i_attack_points = ((Creature) (p_entity)).getAttack_points();
+
+        while (i_count_steps != 0 ) {
+            Creature victim = (Creature) goalNode.getNode().getEntity();
+
+            victim.setHp(victim.getHp() - i_attack_points);
+            i_count_steps -= 1;
+        }
+    }
+
     public static void create_entities() {
 
         Predator bear = new Bear();
@@ -94,14 +109,11 @@ public class Map {
 
         Rock rock0 = new Rock();
         Settings.getMap_double_arr_matrix()[3][0].setEntity(rock0);
-        Settings.getMap_all_entities().put(rock0, Settings.getMap_double_arr_matrix()[3][0]);
 
         Rock rock1 = new Rock();
         Settings.getMap_double_arr_matrix()[3][1].setEntity(rock1);
-        Settings.getMap_all_entities().put(rock1, Settings.getMap_double_arr_matrix()[3][1]);
 
         Rock rock2 = new Rock();
         Settings.getMap_double_arr_matrix()[3][2].setEntity(rock2);
-        Settings.getMap_all_entities().put(rock2, Settings.getMap_double_arr_matrix()[3][2]);
     }
 }

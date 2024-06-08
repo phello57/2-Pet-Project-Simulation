@@ -5,9 +5,6 @@ import GameClasses.Entity;
 import java.util.HashMap;
 
 public class Settings {
-    /*   Exceptions   */
-
-    public static Exception exc_goal_forgotten = new Exception();
 
     /*   Map   */
     private static byte map_length = 4;
