@@ -1,10 +1,9 @@
 package GameClasses;
 
+
 abstract public class Creature extends Entity{
      private int hp;
-     private int speed;
-
-
+     private int steps_per_round;
 
      public int getHp() {
           return hp;
@@ -14,11 +13,11 @@ abstract public class Creature extends Entity{
           this.hp = hp;
      }
 
-     public int getSpeed() {
-          return speed;
+     public int getSteps() {
+          return steps_per_round;
      }
 
-     public void setSpeed(int speed) {
-          this.speed = speed;
+     public void setSteps(int steps_per_round) {
+          this.steps_per_round = steps_per_round;
      }
 }

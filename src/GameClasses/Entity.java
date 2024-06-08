@@ -1,15 +1,14 @@
 package GameClasses;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public abstract class Entity {
-    String emoji;
-    ArrayList<Object> arr_goals = new ArrayList<>();
+    private String emoji;
+    private HashSet<String> arr_goals = new HashSet<>();
+
+    public HashSet<String> getArr_goals() {return arr_goals;}
     public String getEmoji() {
         return emoji;
     }
-
-    public void setEmoji(String emoji) {
-        this.emoji = emoji;
-    }
+    public void setEmoji(String emoji) {this.emoji = emoji;}
 }

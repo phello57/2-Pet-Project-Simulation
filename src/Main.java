@@ -2,36 +2,33 @@
 import Utils.*;
 import GameClasses.*;
 import DefaultClasses.*;
-import jdk.jshell.execution.Util;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import java.util.*;
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args)  {
         Grass grass = new Grass();
         Rock rock = new Rock();
         Tree tree = new Tree();
-        Predator bear = new Bear();
-        Pig sheep = new Pig();
 
+        Utils.Map.create_map();
+        Utils.Map.create_entities();
 
-        Utils.Map.create();
-        Settings.getMap_double_arr_matrix()[0][3].setEntity(bear);
-        Settings.getMap_double_arr_matrix()[0][18].setEntity(sheep);
-        for (Node[] arr : Settings.getMap_double_arr_matrix()) {
-            System.out.println();
-            for (Node node : arr) {
-                System.out.print(node);
+        while (true) {
+            for (Node[] arr : Settings.getMap_double_arr_matrix()) {
+                System.out.println();
+                for (Node node : arr) {
+                    System.out.print(node);
+                }
             }
+            System.out.println();
+
+            Utils.Actions.nextTurn();
+
+            Scanner in = new Scanner(System.in);
+            System.out.println();
+            String name = in.next();
         }
-        BFS.iteration(Settings.getMap_double_arr_matrix()[0][3]);
-        PathNode end = BFS.findShortestPath( Settings.getMap_double_arr_matrix()[0][3]
-                            , Settings.getMap_double_arr_matrix()[0][18]);
-        while (end.pathNode != null) {
-            System.out.println(end.node.getW()+"_"+end.node.getL());
-            end = end.pathNode;
-        }
+
+
     }
 }

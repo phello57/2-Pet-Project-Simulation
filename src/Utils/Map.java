@@ -5,7 +5,7 @@ import GameClasses.*;
 import java.util.HashMap;
 
 public class Map {
-    public static void create() {
+    public static void create_map() {
         int s_width = Settings.getMap_width();
         int s_length = Settings.getMap_length();
 
@@ -60,12 +60,48 @@ public class Map {
 
     }
 
-    public static void do_steps(Entity p_entity) {
-        // Получим из хешмапы с целями нашу ноду и путь до цели
-        PathNode goalNode = Settings.getMap_list_goals().get(p_entity);
-        //int i_count_steps = Settings
-        // Проверим точно ли в конце пути находится наша цель, вдруг свинка сбежала
+    public static void do_steps(Entity p_creature) {
+        PathNode goalNode = Settings.getMap_list_goals().get(p_creature);
+        int i_count_steps = ((Creature) (p_creature)).getSteps();
+
+        while (i_count_steps != 0 ) {
+            PathNode endNode = goalNode;
+            try {
+                while (endNode.getPathNode().getPathNode().getNode() != null) {
+                    endNode = endNode.getPathNode();
+                    //System.out.println(goalNode.getNode().getW()+"_"+goalNode.getNode().getL());
+                }
+            } catch (NullPointerException e) {
+                endNode.getPathNode().getNode().setEntity(null);
+                endNode.getNode().setEntity(p_creature);
+            }
 
 
+            endNode.setPathNode(null);
+            endNode.getNode().setEntity(p_creature);
+            i_count_steps -= 1;
+        }
+    }
+    public static void create_entities() {
+
+        Predator bear = new Bear();
+        Settings.getMap_double_arr_matrix()[0][0].setEntity(bear);
+        Settings.getMap_all_entities().put(bear, Settings.getMap_double_arr_matrix()[0][0]);
+
+        Pig sheep = new Pig();
+        Settings.getMap_double_arr_matrix()[5][0].setEntity(sheep);
+        Settings.getMap_all_entities().put(sheep, Settings.getMap_double_arr_matrix()[5][0]);
+
+        Rock rock0 = new Rock();
+        Settings.getMap_double_arr_matrix()[3][0].setEntity(rock0);
+        Settings.getMap_all_entities().put(rock0, Settings.getMap_double_arr_matrix()[3][0]);
+
+        Rock rock1 = new Rock();
+        Settings.getMap_double_arr_matrix()[3][1].setEntity(rock1);
+        Settings.getMap_all_entities().put(rock1, Settings.getMap_double_arr_matrix()[3][1]);
+
+        Rock rock2 = new Rock();
+        Settings.getMap_double_arr_matrix()[3][2].setEntity(rock2);
+        Settings.getMap_all_entities().put(rock2, Settings.getMap_double_arr_matrix()[3][2]);
     }
 }
