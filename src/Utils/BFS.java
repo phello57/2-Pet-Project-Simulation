@@ -62,11 +62,11 @@ public class BFS {
 
                 try {
                 // Переделать , обход камня
-                    if ("class GameClasses.Rock".equals(pointer_node.getEntity().getClass().toString())) {
-                        continue;
-                    }
                     if (set_goals.contains(pointer_node.getEntity().getClass().toString())) {
                         return new PathNode(pointer_node, pathNode);
+                    }
+                    if (!pointer_node.getEntity().getClass().toString().isEmpty()) {
+                        continue;
                     }
                 } catch (NullPointerException e) {}
 

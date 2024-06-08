@@ -7,6 +7,7 @@ import GameClasses.Entity;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 
 import static Utils.BFS.*;
@@ -22,6 +23,7 @@ public class Actions {
         findMove();
         makeMove();
         checkHpUnits();
+        removeBrokenGoals();
     }
     private static void findMove() {
         HashMap<Entity, Node> list_entities = Settings.getMap_all_entities();
@@ -30,6 +32,9 @@ public class Actions {
         for (Map.Entry<Entity, Node> obj : list_entities.entrySet()) {
             Entity entity = obj.getKey();
             Node node = obj.getValue();
+
+            if (entity.getClass().toString().equals("class GameClasses.Grass")) continue;
+
             boolean check_that_goal_not_change = false;
 
 
@@ -83,22 +88,37 @@ public class Actions {
     }
     private static void checkHpUnits() {
         HashMap<Entity, Node> list_entities = Settings.getMap_all_entities();
+        HashMap<Entity, Node> list_dead = new HashMap<>();
 
-        for (Map.Entry<Entity, Node> obj : list_entities.entrySet()) {
-            Node node = obj.getValue();
-            Entity entity = obj.getKey();
+        for (Iterator<Entity> iterator =
+             list_entities.keySet().iterator(); iterator.hasNext();) {
+            Entity entity = iterator.next();
+            Node node = list_entities.get(entity);
 
-            if ( ((Creature) entity).getHp() == 0 ) {
-                deleteEntityFromEveryWhere(entity, node);
+            if ( (entity).getHp() <= 0 ) {
+                HashMap<Entity, PathNode> list_goals = Settings.getMap_list_goals();
+
+                list_goals.remove(entity);
+                iterator.remove();
+                list_dead.put(entity, node);
+
             }
         }
-    }
-    private static void deleteEntityFromEveryWhere(Entity p_entity, Node node) {
-        HashMap<Entity, Node> list_entities = Settings.getMap_all_entities();
-        HashMap<Entity, PathNode> list_goals = Settings.getMap_list_goals();
 
-        list_goals.remove(p_entity);
-        list_entities.remove(p_entity);
-        node.setEntity(null);
+        for (Map.Entry<Entity, Node> obj : list_dead.entrySet()){
+            Node node = obj.getValue();
+            node.setEntity(null);
+        }
+
+    }
+    private static void removeBrokenGoals() {
+        HashMap<Entity, PathNode> goals = Settings.getMap_list_goals();
+        HashMap<Entity, Node> remove_goals = Settings.getMap_remove_goals();
+
+        for (Map.Entry<Entity, Node> obj : remove_goals.entrySet()) {
+            Entity entity = obj.getKey();
+            goals.remove(entity);
+        }
+        remove_goals.clear();
     }
 }

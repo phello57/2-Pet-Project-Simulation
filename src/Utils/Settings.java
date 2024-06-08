@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class Settings {
 
     /*   Map   */
-    private static byte map_length = 4;
-    private static byte map_width = 6;
+    private static byte map_length = 15;
+    private static byte map_width = 15;
 
     // Наш двухмерный массив с нодами
     private static Node[][] map_double_arr_matrix = new Node[map_width][map_length];
@@ -20,6 +20,21 @@ public class Settings {
     public static HashMap<Entity, Node> getMap_all_entities() {return map_all_entities;}
 
     private static HashMap<Entity, Node> map_all_entities = new HashMap<>();
+
+    public static HashMap<Entity, Node> getMap_remove_goals() {
+        return map_remove_goals;
+    }
+
+    private static HashMap<Entity, Node> map_remove_goals = new HashMap<>();
+
+
+    /*   Spawn   */
+    private static int spawn_bear = 1;
+    private static int spawn_grass = 14;
+    private static int spawn_pig = 4;
+    private static int spawn_rock = 17;
+    private static int spawn_tree = 10;
+
 
 
     /*   Emojies   */
@@ -42,11 +57,21 @@ public class Settings {
     private static final int hp_bear = 30;
 
 
+    private static  int hp_grass = 5;
+
+
     /*   Attack   */
     private static final int attack_bear = 15;
+    private static final int attack_pig = 5;
 
 
-
+    public static int getHp_grass() {return hp_grass;}
+    public static int getAttack_pig() {return attack_pig;}
+    public static int getSpawn_bear() {return spawn_bear;}
+    public static int getSpawn_grass() {return spawn_grass;}
+    public static int getSpawn_pig() {return spawn_pig;}
+    public static int getSpawn_rock() {return spawn_rock;}
+    public static int getSpawn_tree() {return spawn_tree;}
     public static HashMap<Entity, PathNode> getMap_list_goals() {return map_list_goals;}
     public static HashMap<String, Node> getMap_nodes_hashmap() {return map_nodes_hashmap;}
     public static Node[][] getMap_double_arr_matrix() {return map_double_arr_matrix;}

@@ -66,31 +66,46 @@ public class Map {
 
         while (i_count_steps != 0 ) {
             PathNode endNode = goalNode;
+
+            // нужно в endNode дойти до начального узла, что бы свичнуть сущность с первого узла на второй
             try {
                 while (endNode.getPathNode().getPathNode().getNode() != null) {
                     endNode = endNode.getPathNode();
                     //System.out.println(goalNode.getNode().getW()+"_"+goalNode.getNode().getL());
                 }
-            } catch (NullPointerException e) {
-                endNode.getPathNode().getNode().setEntity(null);
-                endNode.getNode().setEntity(p_entity);
+            } catch (NullPointerException e) { // сработает ошибка,
+
+
+
+
             }
 
 
-            endNode.setPathNode(null);
-            endNode.getNode().setEntity(p_entity);
+
+            // обнуляем во втором узле ссылку
+            // даем второму узлу текущую сущность - перемещаем её по родителям
+            if (endNode.getNode().getEntity() != null) { // если в первом узле кто то есть, то удаляем путь, надо искать вновь
+                Settings.getMap_remove_goals().put(p_entity,null );
+
+            } else {
+                // в глобальной мапе переписываем координаты
+                Utils.Settings.getMap_all_entities().remove(p_entity);
+                Utils.Settings.getMap_all_entities().put(p_entity, endNode.getNode());
+                endNode.getPathNode().getNode().setEntity(null);
+                endNode.setPathNode(null);
+                endNode.getNode().setEntity(p_entity);
+            }
             i_count_steps -= 1;
         }
     }
     public static void do_attack(Entity p_entity) {
         PathNode goalNode = Settings.getMap_list_goals().get(p_entity);
-        // проверка что жертва не убежала
 
         int i_count_steps = ((Creature) (p_entity)).getSteps();
         int i_attack_points = ((Creature) (p_entity)).getAttack_points();
 
         while (i_count_steps != 0 ) {
-            Creature victim = (Creature) goalNode.getNode().getEntity();
+            Entity victim =  goalNode.getNode().getEntity();
 
             victim.setHp(victim.getHp() - i_attack_points);
             i_count_steps -= 1;
@@ -99,21 +114,77 @@ public class Map {
 
     public static void create_entities() {
 
-        Predator bear = new Bear();
-        Settings.getMap_double_arr_matrix()[0][0].setEntity(bear);
-        Settings.getMap_all_entities().put(bear, Settings.getMap_double_arr_matrix()[0][0]);
+        int count_bears = Settings.getSpawn_bear();
+        for (; count_bears != 0; count_bears--) {
+            createEntity("bear");
+        }
+        int count_rocks = Settings.getSpawn_rock();
+        for (; count_rocks != 0; count_rocks--) {
+            createEntity("rock");
+        }
+        int count_pigs = Settings.getSpawn_pig();
+        for (; count_pigs != 0; count_pigs--) {
+            createEntity("pig");
+        }
+        int count_trees = Settings.getSpawn_tree();
+        for (; count_trees != 0; count_trees--) {
+            createEntity("tree");
+        }
+        int count_grasses = Settings.getSpawn_grass();
+        for (; count_grasses != 0; count_grasses--) {
+            createEntity("grass");
+        }
 
-        Pig sheep = new Pig();
-        Settings.getMap_double_arr_matrix()[5][0].setEntity(sheep);
-        Settings.getMap_all_entities().put(sheep, Settings.getMap_double_arr_matrix()[5][0]);
+    }
+    public static void createEntity(String p_type) {
+         Node [][] map = Settings.getMap_double_arr_matrix();
+         int w = (int) (Math.random() * Settings.getMap_width());
+         int l = (int) (Math.random() * Settings.getMap_length());
 
-        Rock rock0 = new Rock();
-        Settings.getMap_double_arr_matrix()[3][0].setEntity(rock0);
+         boolean b_entity_created = false;
+         switch (p_type) {
+             case ("bear"):
+                 if (map[w][l].getEntity() == null) {
+                     Bear bear = new Bear();
+                     map[w][l].setEntity(new Bear());
+                     Settings.getMap_all_entities().put(bear, Settings.getMap_double_arr_matrix()[w][l]);
+                     b_entity_created = true;
+                 }
+                 break;
+             case ("rock"):
+                 if (map[w][l].getEntity() == null) {
+                     Rock rock = new Rock();
+                     map[w][l].setEntity(rock);
+                     b_entity_created = true;
+                 }
+                 break;
+             case ("pig"):
+                 if (map[w][l].getEntity() == null) {
+                     Pig pig = new Pig();
+                     map[w][l].setEntity(pig);
+                     Settings.getMap_all_entities().put(pig, Settings.getMap_double_arr_matrix()[w][l]);
+                     b_entity_created = true;
+                 }
+                 break;
+             case ("tree"):
+                 if (map[w][l].getEntity() == null) {
+                     Tree tree = new Tree();
+                     map[w][l].setEntity(tree);
 
-        Rock rock1 = new Rock();
-        Settings.getMap_double_arr_matrix()[3][1].setEntity(rock1);
-
-        Rock rock2 = new Rock();
-        Settings.getMap_double_arr_matrix()[3][2].setEntity(rock2);
+                     b_entity_created = true;
+                 }
+                 break;
+             case ("grass"):
+                 if (map[w][l].getEntity() == null) {
+                     Grass grass = new Grass();
+                     map[w][l].setEntity(grass);
+                     Settings.getMap_all_entities().put(grass, Settings.getMap_double_arr_matrix()[w][l]);
+                     b_entity_created = true;
+                 }
+                 break;
+         }
+         if (!b_entity_created) { // Можем попасть на ячейку, в которой уже есть сущность
+             createEntity(p_type);
+         }
     }
 }
