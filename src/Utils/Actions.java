@@ -2,7 +2,6 @@ package Utils;
 
 import DefaultClasses.Node;
 import DefaultClasses.PathNode;
-import GameClasses.Creature;
 import GameClasses.Entity;
 
 import java.util.HashMap;
@@ -17,8 +16,6 @@ public class Actions {
         Utils.Map.create_map();
         Utils.Map.create_entities();
     }
-
-    /* У всех живых существ вызываем поиск пути */
     public static void nextTurn() {
         findMove();
         makeMove();
@@ -29,11 +26,13 @@ public class Actions {
         HashMap<Entity, Node> list_entities = Settings.getMap_all_entities();
         HashMap<Entity, PathNode> list_goals = Settings.getMap_list_goals();
 
+        // каждая сущность в списке
         for (Map.Entry<Entity, Node> obj : list_entities.entrySet()) {
             Entity entity = obj.getKey();
             Node node = obj.getValue();
 
             if (entity.getClass().toString().equals("class GameClasses.Grass")) continue;
+            // додж травы, видимо ошибка на этапе проектирования
 
             boolean check_that_goal_not_change = false;
 
@@ -41,7 +40,7 @@ public class Actions {
             if (!list_goals.containsKey(entity)) {
                 createGoal(node, entity, list_goals);
             } else if (list_goals.containsKey(entity)) { // Смотрим в конечную ячейку, на сущность, всё еще ли там находится цель
-                Node node2 = list_goals.get(entity).getNode();
+                Node node2 = list_goals.get(entity).getNode(); // кей - медведь(текущий entity) , велью - pathnode, у него берем ноду, в ноде цель убийства
 
                 HashSet<String> goals_of_entity = entity.getArr_goals();
 
@@ -51,17 +50,18 @@ public class Actions {
                         if (str.equals(entity_class)) {
                             check_that_goal_not_change = true;
                         }
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException e) { // там пусто, свинья движется куда то
                         check_that_goal_not_change = false;
                     }
                 }
-                if (!check_that_goal_not_change) {
+                if (!check_that_goal_not_change) { // удаляем путь, ищем снова
                     list_goals.remove(entity);
                     createGoal(node, entity, list_goals);
                 }
             }
         }
     }
+
     public static void createGoal(Node p_node, Entity p_entity,  HashMap<Entity, PathNode> p_list_goals) {
         PathNode pathNode2 = findShortestPath(p_node, p_entity);
         if (pathNode2 == null) {

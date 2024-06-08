@@ -21,9 +21,7 @@ public class Settings {
 
     private static HashMap<Entity, Node> map_all_entities = new HashMap<>();
 
-    public static HashMap<Entity, Node> getMap_remove_goals() {
-        return map_remove_goals;
-    }
+    public static HashMap<Entity, Node> getMap_remove_goals() {return map_remove_goals;}
 
     private static HashMap<Entity, Node> map_remove_goals = new HashMap<>();
 

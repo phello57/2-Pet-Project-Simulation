@@ -15,7 +15,7 @@ public class Map {
 
         for (byte wid = 0; wid < s_width; wid++) {  // count []
             for (byte len = 0; len < s_length; len++) { // index
-                s_matrix[wid][len] = new Node(wid, len, null);
+                s_matrix[wid][len] = new Node(wid, len);
                 s_hashmap.put(wid+"_"+len, s_matrix[wid][len]);
             }
         }
@@ -73,17 +73,11 @@ public class Map {
                     endNode = endNode.getPathNode();
                     //System.out.println(goalNode.getNode().getW()+"_"+goalNode.getNode().getL());
                 }
-            } catch (NullPointerException e) { // сработает ошибка,
+            } catch (NullPointerException e) {}
 
 
 
 
-            }
-
-
-
-            // обнуляем во втором узле ссылку
-            // даем второму узлу текущую сущность - перемещаем её по родителям
             if (endNode.getNode().getEntity() != null) { // если в первом узле кто то есть, то удаляем путь, надо искать вновь
                 Settings.getMap_remove_goals().put(p_entity,null );
 
@@ -91,6 +85,9 @@ public class Map {
                 // в глобальной мапе переписываем координаты
                 Utils.Settings.getMap_all_entities().remove(p_entity);
                 Utils.Settings.getMap_all_entities().put(p_entity, endNode.getNode());
+
+                // обнуляем во втором узле ссылку
+                // даем второму узлу текущую сущность - перемещаем её по родителям
                 endNode.getPathNode().getNode().setEntity(null);
                 endNode.setPathNode(null);
                 endNode.getNode().setEntity(p_entity);

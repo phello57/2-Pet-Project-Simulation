@@ -4,10 +4,6 @@ public class PathNode {
     private Node node;
     private PathNode pathNode;
 
-    public void setNode(Node node) {
-        this.node = node;
-    }
-
     public Node getNode() {
         return node;
     }
