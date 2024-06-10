@@ -3,12 +3,12 @@ import Utils.Settings;
 
 public class Pig extends Herbivore{
     public Pig() {
-        this.setEmoji(Settings.getEmoji_pig());
-        this.setSteps(Settings.getSteps_pig());
-        this.setHp(Settings.getHp_pig());
-        this.setAttack_points(Settings.getAttack_pig());
+        this.setEmoji(Settings.getEmojiPig());
+        this.setSteps(Settings.getStepsPig());
+        this.setHp(Settings.getHpPig());
+        this.setAttackPoints(Settings.getAttackPig());
 
         // Список существ, которые являются целью уничтожения
-        this.getArr_goals().add(Grass.class.toString());
+        this.getArrGoals().add(Grass.class.toString());
     }
 }

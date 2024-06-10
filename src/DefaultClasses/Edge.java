@@ -2,7 +2,6 @@ package DefaultClasses;
 
 public class Edge {
     private final Node pointerNode;
-
     public Edge(Node pointerNode) {
         this.pointerNode = pointerNode;
     }

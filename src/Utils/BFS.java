@@ -10,16 +10,16 @@ import GameClasses.*;
 public class BFS {
 
     // поиск в ширину
-    public static PathNode findShortestPath(Node p_start_node, Entity p_entity) {
+    public static PathNode findShortestPath(Node pStartNode, Entity pEntity) {
 
-        HashSet<String> set_goals = p_entity.getArr_goals();
+        HashSet<String> set_goals = pEntity.getArrGoals();
         if (set_goals.isEmpty()) {return null;}
 
         HashSet<Node> set_passed = new HashSet<>();
         LinkedList<PathNode> queue = new LinkedList<>();
-        queue.addLast(new PathNode(p_start_node, null));
+        queue.addLast(new PathNode(pStartNode, null));
 
-        set_passed.add(p_start_node);
+        set_passed.add(pStartNode);
         while (!queue.isEmpty()) {
             PathNode pathNode = queue.removeFirst();
             if (set_goals.contains(pathNode.getNode().getEntity())) return pathNode;

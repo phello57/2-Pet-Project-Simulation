@@ -10,29 +10,23 @@ import java.util.Scanner;
 public class Simulation {
     public static void start() {
 
-
         Utils.Actions.initActions();
 
-        run_one_cycle();
-
         while (true) {
-            run_one_cycle();
-        }
-    }
-
-    private static void run_one_cycle() {
-        Utils.Actions.nextTurn();
-
-        for (Node[] arr : Settings.getMap_double_arr_matrix()) {
-            System.out.println();
-            for (Node node : arr) {
-                System.out.print(node);
+            for (Node[] arr : Settings.getMapDoubleArrMatrix()) {
+                System.out.println();
+                for (Node node : arr) {
+                    System.out.print(node);
+                }
             }
-        }
-        System.out.println();
 
-        Scanner in2 = new Scanner(System.in);
-        System.out.println();
-        String name = in2.next();
+            System.out.println();
+
+            Scanner in2 = new Scanner(System.in);
+            System.out.println();
+            in2.next();
+
+            Utils.Actions.nextTurn();
+        }
     }
 }

@@ -5,7 +5,7 @@ import Utils.Settings.*;
 public class Grass extends Entity{
 
     public Grass() {
-        this.setHp(Settings.getHp_grass());
-        this.setEmoji(Settings.getEmoji_grass());
+        this.setHp(Settings.getHpGrass());
+        this.setEmoji(Settings.getEmojiGrass());
     }
 }
