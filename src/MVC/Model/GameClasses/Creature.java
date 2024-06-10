@@ -1,4 +1,4 @@
-package GameClasses;
+package MVC.Model.GameClasses;
 
 
 abstract public class Creature extends Entity{

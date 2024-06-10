@@ -1,4 +1,4 @@
-package DefaultClasses;
+package MVC.Model.UtilsClasses;
 
 public class Edge {
     private final Node pointerNode;

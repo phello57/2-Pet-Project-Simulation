@@ -1,7 +1,7 @@
-package DefaultClasses;
+package MVC.Model.UtilsClasses;
 
-import GameClasses.Entity;
-import Utils.Settings;
+import MVC.Model.GameClasses.Entity;
+import MVC.Model.Model;
 
 import java.util.LinkedHashSet;
 
@@ -28,7 +28,7 @@ public class Node {
     @Override
     public String toString() {
         if (this.getEntity() == null) {
-            return Settings.getEmojiVoid();
+            return Model.getEmojiVoid();
         }
         return this.getEntity().getEmoji();
     }

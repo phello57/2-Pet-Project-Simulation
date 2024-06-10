@@ -1,4 +1,4 @@
-package GameClasses;
+package MVC.Model.GameClasses;
 
 import java.util.HashSet;
 

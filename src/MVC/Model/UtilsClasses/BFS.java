@@ -1,11 +1,9 @@
-package Utils;
-import DefaultClasses.*;
+package MVC.Model.UtilsClasses;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Queue;
-import GameClasses.*;
+
+import MVC.Model.GameClasses.Entity;
 
 public class BFS {
 

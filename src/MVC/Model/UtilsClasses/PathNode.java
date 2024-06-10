@@ -1,4 +1,4 @@
-package DefaultClasses;
+package MVC.Model.UtilsClasses;
 
 public class PathNode {
     private Node node;
@@ -20,4 +20,6 @@ public class PathNode {
         this.node = node;
         this.pathNode = pathNode;
     }
+
+
 }
