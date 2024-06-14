@@ -1,13 +1,15 @@
 package MVC.Model.GameClasses;
 
-import MVC.Model.Model;
+import MVC.Model.UtilsClasses.Node;
+import MVC.Settings;
 
-public class Bear extends Predator{
-    public Bear() {
-        this.setEmoji(Model.getEmojiBear());
-        this.setHp(Model.getHpBear());
-        this.setAttackPoints(Model.getAttackBear());
-        this.setSteps(Model.getStepsBear());
+public class Bear extends Creature {
+    public Bear(Node node) {
+        super(node);
+        this.setEmoji(Settings.EMOJI_BEAR);
+        this.setSteps(Settings.STEPS_BEAR);
+        this.setHp(Settings.HP_BEAR);
+        this.setAttackPoints(Settings.ATTACK_BEAR);
 
         // Список существ, которые являются целью уничтожения
         this.getArrGoals().add(Pig.class.toString());

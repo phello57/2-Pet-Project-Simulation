@@ -1,10 +1,12 @@
 package MVC.Model.GameClasses;
-import MVC.Model.Model;
+import MVC.Model.UtilsClasses.Node;
+import MVC.Settings;
 
 public class Grass extends Entity{
 
-    public Grass() {
-        this.setHp(Model.getHpGrass());
-        this.setEmoji(Model.getEmojiGrass());
+    public Grass(Node node) {
+        super(node);
+        this.setHp(Settings.HP_GRASS);
+        this.setEmoji(Settings.EMOJI_GRASS);
     }
 }

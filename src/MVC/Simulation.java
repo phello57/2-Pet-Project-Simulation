@@ -1,41 +1,40 @@
 package MVC;
 
 import MVC.Controller.*;
-import MVC.Model.UtilsClasses.Node;
-import MVC.Model.Model;
+import MVC.Model.GameClasses.GameMap;
+import MVC.Controller.Render;
 
 import java.util.Scanner;
 
 public class Simulation {
-    public static void start() {
-
-        initActions();
+    private int countRounds = 0;
+    private int countRoundsSet = 0;
+    public void start() {
+        // создали карту
+        GameMap map2 = new GameMap(Settings.MAP_LENGTH
+                                  ,Settings.MAP_WIDTH
+        );
+        Actions.initActions(map2);
 
         while (true) {
-            for (Node[] arr : Model.getMapDoubleArrMatrix()) {
+
+            System.out.println();System.out.println();System.out.println();
+            System.out.println("Раунд: " + countRounds);
+            Render.printMap(map2);
+
+            if (countRoundsSet == 0) {
+
+                Scanner in2 = new Scanner(System.in);
                 System.out.println();
-                for (Node node : arr) {
-                    System.out.print(node);
-                }
+                System.out.println("Введите число, сколько ходов нужно просимулировать.");
+                countRoundsSet = in2.nextInt();
+            } else {
+                countRoundsSet--;
             }
 
-            System.out.println();
-
-            Scanner in2 = new Scanner(System.in);
-            System.out.println();
-            in2.next();
-
-            nextTurn();
+            Actions.turnActions(map2);
+            countRounds++;
         }
     }
-    public static void initActions() {
-        View.createMap();
-        View.createEntities();
-    }
 
-    public static void nextTurn() {
-        Controller.findMove();
-        Actions.makeMove();
-        Controller.removeDeadEntities();
-    }
 }

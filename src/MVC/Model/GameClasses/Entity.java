@@ -1,12 +1,19 @@
 package MVC.Model.GameClasses;
 
+import MVC.Model.UtilsClasses.Node;
+
 import java.util.HashSet;
 
 public abstract class Entity {
+    public Node getCurNode() {return curNode;}
+    Entity(Node node) {this.curNode = node;}
+    public void setCurNode(Node curNode) {
+        this.curNode = curNode;
+    }
+    private Node curNode;
     private String emoji;
     private int hp;
     private final HashSet<String> arrGoals = new HashSet<>();
-
     public int getHp() {
         return hp;
     }
@@ -16,4 +23,5 @@ public abstract class Entity {
         return emoji;
     }
     public void setEmoji(String emoji) {this.emoji = emoji;}
-}
+
+   }
