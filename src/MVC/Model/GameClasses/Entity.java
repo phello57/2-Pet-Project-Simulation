@@ -14,11 +14,15 @@ public abstract class Entity {
     private String emoji;
     private int hp;
     private final HashSet<String> arrGoals = new HashSet<>();
+    public HashSet<String> getArrGoals() {return arrGoals;}
+
+    public void addToArrGoals(String str) {
+        arrGoals.add(str);
+    }
     public int getHp() {
         return hp;
     }
     public void setHp(int hp) {this.hp = hp;}
-    public HashSet<String> getArrGoals() {return arrGoals;}
     public String getEmoji() {
         return emoji;
     }

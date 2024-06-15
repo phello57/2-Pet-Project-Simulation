@@ -32,4 +32,10 @@ public class Settings {
     /*   Attack   */
     public static final int ATTACK_BEAR = 15;
     public static final int ATTACK_PIG = 5;
+
+    public static final int STAMINA_SUB_PER_ROUND = 5;
+    public static final int STAMINA_SUB_HP_PER_ROUND = 5;
+
+    public static final int STAMINA_FROM_PIG = 70;
+    public static final int STAMINA_FROM_GRASS = 35;
 }

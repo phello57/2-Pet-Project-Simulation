@@ -9,9 +9,9 @@ public class Pig extends Creature {
         this.setSteps(Settings.STEPS_PIG);
         this.setHp(Settings.HP_PIG);
         this.setAttackPoints(Settings.ATTACK_PIG);
+        this.setStamina(50);
 
         // Список существ, которые являются целью уничтожения
-
         this.getArrGoals().add(Grass.class.toString());
     }
 }

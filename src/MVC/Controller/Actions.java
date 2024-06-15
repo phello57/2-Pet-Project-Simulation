@@ -12,7 +12,7 @@ public class Actions {
         createEntities(pMap, Settings.SPAWN_BEAR, Settings.SPAWN_ROCK, Settings.SPAWN_PIG, Settings.SPAWN_TREE, Settings.SPAWN_GRASS);
     }
     public static void addEntities(GameMap pMap) {
-        createEntities(pMap, 0, 0, 5, 0, 20);
+        //createEntities(pMap, 0, 0, 5, 0, 20);
     }
     private static void createEntities(GameMap pMap, int pBear, int pRock, int pPig, int pTree, int pGrass) {
 
@@ -97,11 +97,13 @@ public class Actions {
              pMap.getMAP_ALL_ENTITIES().iterator(); iterator.hasNext(); )
         {
             Entity entity = iterator.next();
+
             if (entity.getHp() <= 0 ) {
                 iterator.remove();
                 entity.getCurNode().setEntity(null);
                 continue;
             }
+
             if (!entity.getArrGoals().isEmpty()) {
                 ((Creature) entity).makeMove();
             }

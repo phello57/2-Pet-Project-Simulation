@@ -10,6 +10,7 @@ public class Bear extends Creature {
         this.setSteps(Settings.STEPS_BEAR);
         this.setHp(Settings.HP_BEAR);
         this.setAttackPoints(Settings.ATTACK_BEAR);
+        this.setStamina(100);
 
         // Список существ, которые являются целью уничтожения
         this.getArrGoals().add(Pig.class.toString());

@@ -3,6 +3,7 @@ package MVC.Model.GameClasses;
 import MVC.Model.UtilsClasses.Edge;
 import MVC.Model.UtilsClasses.Node;
 import MVC.Model.UtilsClasses.PathNode;
+import MVC.Settings;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -12,6 +13,17 @@ abstract public class Creature extends Entity{
           super(node);
      }
      private int stepsPerRound;
+     private int stamina;
+
+     public int getStamina() {
+          return stamina;
+     }
+
+     public void setStamina(int stamina) {
+          this.stamina = stamina;
+     }
+
+
      private int attackPoints;
      private PathNode currentGoal;
      public PathNode getCurrentGoal() {return currentGoal;}
@@ -81,6 +93,15 @@ abstract public class Creature extends Entity{
                Entity victim =  goalNode.getNode().getEntity();
 
                victim.setHp(victim.getHp() - iAttackPoints);
+
+               if (victim.getHp() <= 0 ) {
+                    if (victim.getClass().toString().equals("class MVC.Model.GameClasses.Pig")) {
+                         this.setStamina(this.getStamina() + Settings.STAMINA_FROM_PIG);
+                    } else if (victim.getClass().toString().equals("class MVC.Model.GameClasses.Grass")) {
+                         this.setStamina(this.getStamina() + Settings.STAMINA_FROM_GRASS);
+                    }
+
+               }
                iCountSteps -= 1;
           }
      }
@@ -89,10 +110,21 @@ abstract public class Creature extends Entity{
 
           this.initGoal();
 
+          this.setStamina(this.getStamina() - Settings.STAMINA_SUB_PER_ROUND);
+
+          if (this.getStamina() <= 0) {
+               this.setHp(this.getHp() - Settings.STAMINA_SUB_HP_PER_ROUND);
+               System.out.println();
+               System.out.println(this.getClass());
+               System.out.println("Entity stamina: "+this.getHp());
+          }
+
           if (currentGoal == null) {
-              return;
+
           } else if (currentGoal.getPathNode().getNode().getEntity() == this) { // Когда жертва в 1 узле от итерируемой сущности
+
                this.attack();
+
           } else {
                this.doSteps();
           }
