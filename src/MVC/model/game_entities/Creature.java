@@ -1,8 +1,8 @@
-package MVC.Model.GameClasses;
+package MVC.model.game_entities;
 
-import MVC.Model.UtilsClasses.Edge;
-import MVC.Model.UtilsClasses.Node;
-import MVC.Model.UtilsClasses.PathNode;
+import MVC.model.classes_for_bfs.Edge;
+import MVC.model.classes_for_bfs.Node;
+import MVC.model.classes_for_bfs.PathNode;
 import MVC.Settings;
 
 import java.util.HashSet;
@@ -14,6 +14,17 @@ abstract public class Creature extends Entity{
      }
      private int stepsPerRound;
      private int stamina;
+     private int hp;
+     private final HashSet<String> arrGoals = new HashSet<>();
+     public HashSet<String> getArrGoals() {return arrGoals;}
+
+     public void addToArrGoals(String str) {
+          arrGoals.add(str);
+     }
+     public int getHp() {
+          return hp;
+     }
+     public void setHp(int hp) {this.hp = hp;}
 
      public int getStamina() {
           return stamina;
@@ -23,7 +34,6 @@ abstract public class Creature extends Entity{
           this.stamina = stamina;
      }
 
-
      private int attackPoints;
      private PathNode currentGoal;
      public PathNode getCurrentGoal() {return currentGoal;}
@@ -32,6 +42,7 @@ abstract public class Creature extends Entity{
      public void setAttackPoints(int attack_points) {this.attackPoints = attack_points;}
      public int getSteps() {return stepsPerRound;}
      public void setSteps(int stepsPerRound) {this.stepsPerRound = stepsPerRound;}
+
 
      private void initGoal() {
           if (this.getArrGoals().isEmpty()) return;
@@ -46,38 +57,38 @@ abstract public class Creature extends Entity{
      }
      private PathNode findShortestPath(Node pStartNode, Entity pEntity) {
 
-          HashSet<String> set_goals = pEntity.getArrGoals();
-          if (set_goals.isEmpty()) {return null;}
+          HashSet<String> setGoals = ((Creature) pEntity).getArrGoals();
+          if (setGoals.isEmpty()) {return null;}
 
-          HashSet<Node> set_passed = new HashSet<>();
+          HashSet<Node> setPassed = new HashSet<>();
           LinkedList<PathNode> queue = new LinkedList<>();
           queue.addLast(new PathNode(pStartNode, null));
 
-          set_passed.add(pStartNode);
+          setPassed.add(pStartNode);
           while (!queue.isEmpty()) {
                PathNode pathNode = queue.removeFirst();
-               if (set_goals.contains(pathNode.getNode().getEntity())) {
+               if (setGoals.contains(pathNode.getNode().getEntity())) {
                     return pathNode;
                }
 
                for (Edge edge : pathNode.getNode().getEdges()) {
-                    Node pointer_node = edge.getPointerNode();
-                    if (set_passed.contains(pointer_node)) continue;
+                    Node pointerNode = edge.getPointerNode();
+                    if (setPassed.contains(pointerNode)) continue;
 
                     try {
-                         if (set_goals.contains(pointer_node.getEntity().getClass().toString())) {
-                              PathNode pathNode2 = new PathNode(pointer_node, pathNode);
+                         if (setGoals.contains(pointerNode.getEntity().getClass().toString())) {
+                              PathNode pathNode2 = new PathNode(pointerNode, pathNode);
                               return pathNode2;
                          }
 
                          // Обход любых сущностей
-                         if (!pointer_node.getEntity().getClass().toString().isEmpty()) {
+                         if (pointerNode.getEntity() != null) {
                               continue;
                          }
                     } catch (NullPointerException e) {}
 
-                    queue.addLast(new PathNode(pointer_node, pathNode));
-                    set_passed.add(pointer_node);
+                    queue.addLast(new PathNode(pointerNode, pathNode));
+                    setPassed.add(pointerNode);
                }
           }
           return null;
@@ -90,14 +101,14 @@ abstract public class Creature extends Entity{
           int iAttackPoints = this.getAttackPoints();
 
           while (iCountSteps != 0 ) {
-               Entity victim =  goalNode.getNode().getEntity();
+               Creature victim =  (Creature) goalNode.getNode().getEntity();
 
                victim.setHp(victim.getHp() - iAttackPoints);
 
-               if (victim.getHp() <= 0 ) {
-                    if (victim.getClass().toString().equals("class MVC.Model.GameClasses.Pig")) {
+               if (victim.getHp() >= 0 ) {
+                    if (victim.getClass().getSimpleName().toString().equals("Pig")) {
                          this.setStamina(this.getStamina() + Settings.STAMINA_FROM_PIG);
-                    } else if (victim.getClass().toString().equals("class MVC.Model.GameClasses.Grass")) {
+                    } else if (victim.getClass().getSimpleName().toString().equals("Grass")) {
                          this.setStamina(this.getStamina() + Settings.STAMINA_FROM_GRASS);
                     }
 
@@ -114,21 +125,19 @@ abstract public class Creature extends Entity{
 
           if (this.getStamina() <= 0) {
                this.setHp(this.getHp() - Settings.STAMINA_SUB_HP_PER_ROUND);
-               System.out.println();
-               System.out.println(this.getClass());
-               System.out.println("Entity stamina: "+this.getHp());
+
           }
 
           if (currentGoal == null) {
 
           } else if (currentGoal.getPathNode().getNode().getEntity() == this) { // Когда жертва в 1 узле от итерируемой сущности
-
                this.attack();
-
           } else {
                this.doSteps();
           }
+
      }
+
      private void doSteps() {
           PathNode goalNode = this.currentGoal;
 

@@ -1,4 +1,4 @@
-package MVC.Model.UtilsClasses;
+package MVC.model.classes_for_bfs;
 
 public class PathNode {
     private Node node;

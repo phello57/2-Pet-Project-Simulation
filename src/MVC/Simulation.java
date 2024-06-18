@@ -1,40 +1,48 @@
 package MVC;
 
 import MVC.Controller.*;
-import MVC.Model.GameClasses.GameMap;
-import MVC.Controller.Render;
+import MVC.model.game_entities.GameMap;
+import MVC.view.Render;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Simulation {
     private int countRounds = 0;
     private int countRoundsSet = 0;
     public void start() {
-        // создали карту
-        GameMap map2 = new GameMap(Settings.MAP_LENGTH
+
+        GameMap game = new GameMap(Settings.MAP_LENGTH
                                   ,Settings.MAP_WIDTH
         );
-        Actions.initActions(map2);
+        Actions.initActions(game);
 
         while (true) {
 
             System.out.println();System.out.println();System.out.println();
             System.out.println("Раунд: " + countRounds);
-            Render.printMap(map2);
+            Render.printMap(game);
 
             if (countRoundsSet == 0) {
 
-                Scanner in2 = new Scanner(System.in);
-                System.out.println();
-                System.out.println("Введите число, сколько ходов нужно просимулировать.");
-                countRoundsSet = in2.nextInt();
+                askValue();
             } else {
-                countRoundsSet--;
+                countRoundsSet -= 1;
             }
 
-            Actions.turnActions(map2);
-            countRounds++;
+            Actions.turnActions(game);
+            countRounds += 1;
         }
     }
-
+    private void askValue() {
+        Scanner in2 = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Введите число, сколько ходов нужно просимулировать.");
+        try {
+            countRoundsSet = in2.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Введено не верное значение, Введите число");
+            askValue();
+        }
+    }
 }

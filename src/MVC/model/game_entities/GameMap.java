@@ -1,39 +1,37 @@
-package MVC.Model.GameClasses;
+package MVC.model.game_entities;
 
-import MVC.Model.UtilsClasses.Edge;
-import MVC.Model.UtilsClasses.Node;
+import MVC.model.classes_for_bfs.Edge;
+import MVC.model.classes_for_bfs.Node;
 import java.util.HashSet;
 
 public class GameMap {
     public GameMap(int w, int l) {
         this.MAP_LENGTH = l;
         this.MAP_WIDTH = w;
-        this.MAP_GAME_MAP = new Node[w][l];
+        this.dArrGameMap = new Node[w][l];
         createMap();
     }
     private final int MAP_LENGTH;
     private final int MAP_WIDTH;
-    private final Node[][] MAP_GAME_MAP;
-    private final HashSet<Entity> MAP_ALL_ENTITIES = new HashSet<>();
+    private final Node[][] dArrGameMap;
+    private final HashSet<Entity> setAllEntities = new HashSet<>();
 
-
-
-    public HashSet<Entity> getMAP_ALL_ENTITIES() {return MAP_ALL_ENTITIES;}
-    public void addToMAP_ALL_ENTITIES(Entity entity) {
-        this.MAP_ALL_ENTITIES.add(entity);
+    public HashSet<Entity> getSetAllEntities() {return setAllEntities;}
+    public void addToSetAllEntities(Entity entity) {
+        this.setAllEntities.add(entity);
     }
-    public Node getNodeOnCoordinate(int w, int l) {
-        return MAP_GAME_MAP[w][l];
+    public Node getNodeOnCoordinate(int width, int length) {
+        return dArrGameMap[width][length];
     }
-    public int getMAP_LENGTH() {
+    public int getMapLength() {
         return MAP_LENGTH;
     }
-    public int getMAP_WIDTH() {
+    public int getMapWidth() {
         return MAP_WIDTH;
     }
-    public void setEntityOnNode(int w, int l, Entity entity) {MAP_GAME_MAP[w][l].setEntity(entity);}
+    public void setEntityOnNode(int w, int l, Entity entity) {dArrGameMap[w][l].setEntity(entity);}
     public Entity getEntityOnNode(int w, int l) {
-        return MAP_GAME_MAP[w][l].getEntity();
+        return dArrGameMap[w][l].getEntity();
     }
 
     private void createMap() {
@@ -44,8 +42,9 @@ public class GameMap {
         }
         wrapperCreateEdges();
     }
+
     private void createMapCell(int pWidth, int pLength, Node pNode) {
-        this.MAP_GAME_MAP[pWidth][pLength] = pNode;
+        dArrGameMap[pWidth][pLength] = pNode;
     }
 
     // Свяжем каждую клетку с 8 клетками вокруг
@@ -55,7 +54,7 @@ public class GameMap {
             for (int len = 0; len < MAP_LENGTH; len++) { // index
                 createEdges(wid
                         , len
-                        , MAP_GAME_MAP[wid][len]);
+                        , dArrGameMap[wid][len]);
             }
         }
     }
@@ -65,7 +64,7 @@ public class GameMap {
         if ( (pL >= 0 && MAP_LENGTH > pL)
                 && (pW >= 0 && MAP_WIDTH > pW)
         ) {
-            pParentNode.addEdge(new Edge(MAP_GAME_MAP[pW][pL]));
+            pParentNode.addEdge(new Edge(dArrGameMap[pW][pL]));
         }
     }
 
@@ -81,7 +80,7 @@ public class GameMap {
         create(pW + 1, pL+ 1   , pNode); // право низ
 
     }
-    public Node[][] getMapGame() {
-        return this.MAP_GAME_MAP;
+    public Node[][] getdArrGameMap() {
+        return this.dArrGameMap;
     }
 }

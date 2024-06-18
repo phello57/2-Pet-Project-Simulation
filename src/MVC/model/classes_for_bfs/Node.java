@@ -1,10 +1,9 @@
-package MVC.Model.UtilsClasses;
+package MVC.model.classes_for_bfs;
 
-import MVC.Model.GameClasses.Entity;
-import MVC.Settings;
+import MVC.model.game_entities.Entity;
 
 import java.util.LinkedHashSet;
-
+import MVC.view.Render;
 public class Node {
 
     private Entity entity;
@@ -28,7 +27,7 @@ public class Node {
     @Override
     public String toString() {
         if (this.getEntity() == null) {
-            return Settings.EMOJI_VOID;
+            return Render.EMOJI_VOID;
         }
         return this.getEntity().getEmoji();
     }

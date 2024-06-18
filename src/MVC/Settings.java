@@ -12,14 +12,6 @@ public class Settings {
     public static final int SPAWN_ROCK = 15;
     public static final int SPAWN_TREE = 15;
 
-    /*   Emojies   */
-    public static final String EMOJI_TREE = "\uD83C\uDF34";
-    public static final String EMOJI_ROCK = "\uD83C\uDFD4\uFE0F️";
-    public static final String EMOJI_GRASS = "\uD83C\uDF3F";
-    public static final String EMOJI_BEAR = "\uD83D\uDC3B";
-    public static final String EMOJI_PIG = "\uD83D\uDC37";
-    public static final String EMOJI_VOID = ". ";
-
     /*   Speed   */
     public static final int STEPS_PIG = 1;
     public static final int STEPS_BEAR = 1;
@@ -33,9 +25,15 @@ public class Settings {
     public static final int ATTACK_BEAR = 15;
     public static final int ATTACK_PIG = 5;
 
+    /*   Stamina   */
     public static final int STAMINA_SUB_PER_ROUND = 5;
     public static final int STAMINA_SUB_HP_PER_ROUND = 5;
+    public static final int STAMINA_PIG = 100;
+    public static final int STAMINA_BEAR = 100;
 
+    /*   when obj1 kill obj2 he got:   */
     public static final int STAMINA_FROM_PIG = 70;
     public static final int STAMINA_FROM_GRASS = 35;
+
+
 }
