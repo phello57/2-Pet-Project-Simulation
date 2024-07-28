@@ -1,9 +1,9 @@
-package MVC.model.classes_for_bfs;
+package game.model.BFS;
 
-import MVC.model.game_entities.Entity;
+import game.model.game_entities.Entity;
 
 import java.util.LinkedHashSet;
-import MVC.view.Render;
+import game.view.Render;
 public class Node {
 
     private Entity entity;
@@ -24,11 +24,5 @@ public class Node {
     public Node() {
         this.edges = new LinkedHashSet<>();
     }
-    @Override
-    public String toString() {
-        if (this.getEntity() == null) {
-            return Render.EMOJI_VOID;
-        }
-        return this.getEntity().getEmoji();
-    }
+
 }

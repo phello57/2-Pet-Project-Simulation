@@ -1,17 +1,17 @@
-package MVC.model.game_entities;
+package game.model.game_entities;
 
-import MVC.model.classes_for_bfs.Node;
-
-import java.util.HashSet;
+import game.model.BFS.Node;
 
 public abstract class Entity {
     Entity(Node node) {this.curNode = node;}
 
-    private Node curNode;
-    private String emoji;
+    protected Node curNode;
+    protected String emoji;
 
     public String getEmoji() {return emoji;}
+    public void setEmoji(String emoji) {this.emoji = emoji;}
+
     public Node getCurNode() {return curNode;}
     public void setCurNode(Node curNode) {this.curNode = curNode;}
-    public void setEmoji(String emoji) {this.emoji = emoji;}
+
    }

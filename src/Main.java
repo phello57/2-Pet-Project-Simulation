@@ -1,5 +1,7 @@
 
-import MVC.Simulation;
+import game.Simulation;
+
+import java.util.Arrays;
 
 public class Main {
 

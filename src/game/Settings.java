@@ -1,4 +1,4 @@
-package MVC;
+package game;
 
 public class Settings {
     /*   Map   */

@@ -1,4 +1,4 @@
-package MVC.model.classes_for_bfs;
+package game.model.BFS;
 
 public class Edge {
     private final Node pointerNode;

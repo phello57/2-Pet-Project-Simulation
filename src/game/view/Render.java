@@ -1,7 +1,7 @@
-package MVC.view;
+package game.view;
 
-import MVC.model.game_entities.GameMap;
-import MVC.model.classes_for_bfs.Node;
+import game.model.game_entities.GameMap;
+import game.model.BFS.Node;
 
 public class Render {
     /*   Emojies   */
@@ -11,12 +11,18 @@ public class Render {
     public static final String EMOJI_BEAR = "\uD83D\uDC3B";
     public static final String EMOJI_PIG = "\uD83D\uDC37";
     public static final String EMOJI_VOID = ". ";
+
+
     public static void printMap(GameMap pMap) {
-        Node[][] map = pMap.getdArrGameMap();
+        Node[][] map = pMap.getGAME_MAP();
         for (int w = 0; w < map.length; w++) {
             System.out.println();
             for (int l = 0; l < map[0].length; l++) {
-                System.out.print(map[w][l]);
+                if (map[w][l].getEntity() != null){
+                    System.out.print(map[w][l].getEntity().getEmoji());
+                } else {
+                    System.out.print(EMOJI_VOID);
+                }
             }
         }
 

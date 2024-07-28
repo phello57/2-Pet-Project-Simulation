@@ -1,8 +1,8 @@
-package MVC;
+package game;
 
-import MVC.Controller.*;
-import MVC.model.game_entities.GameMap;
-import MVC.view.Render;
+import game.Control.*;
+import game.model.game_entities.GameMap;
+import game.view.Render;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,9 +13,10 @@ public class Simulation {
     public void start() {
 
         GameMap game = new GameMap(Settings.MAP_LENGTH
-                                  ,Settings.MAP_WIDTH
-        );
-        Actions.initActions(game);
+                                  ,Settings.MAP_WIDTH);
+
+        Control control = new Control(game);
+        control.initAction();
 
         while (true) {
 
@@ -30,14 +31,15 @@ public class Simulation {
                 countRoundsSet -= 1;
             }
 
-            Actions.turnActions(game);
+            control.turnActions();
             countRounds += 1;
         }
     }
     private void askValue() {
-        Scanner in2 = new Scanner(System.in);
         System.out.println();
         System.out.println("Введите число, сколько ходов нужно просимулировать.");
+        Scanner in2 = new Scanner(System.in);
+
         try {
             countRoundsSet = in2.nextInt();
         } catch (InputMismatchException e) {
