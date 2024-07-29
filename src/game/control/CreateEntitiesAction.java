@@ -1,6 +1,6 @@
-package game.Control;
+package game.control;
 
-import game.Settings;
+import game.launch.Settings;
 import game.model.BFS.Node;
 import game.model.factory.*;
 import game.model.game_entities.*;

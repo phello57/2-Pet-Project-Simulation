@@ -1,4 +1,4 @@
-package game.Control;
+package game.control;
 
 import game.model.game_entities.GameMap;
 

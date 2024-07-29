@@ -3,7 +3,7 @@ package game.model.game_entities;
 import game.model.BFS.Edge;
 import game.model.BFS.Node;
 import game.model.BFS.PathNode;
-import game.Settings;
+import game.launch.Settings;
 
 import java.util.HashSet;
 import java.util.LinkedList;

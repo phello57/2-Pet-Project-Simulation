@@ -1,7 +1,7 @@
 package game.model.game_entities;
 
 import game.model.BFS.Node;
-import game.Settings;
+import game.launch.Settings;
 import game.view.Render;
 public class Bear extends Creature {
     public Bear(Node node) {

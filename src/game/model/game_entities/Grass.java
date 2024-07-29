@@ -1,6 +1,6 @@
 package game.model.game_entities;
 import game.model.BFS.Node;
-import game.Settings;
+import game.launch.Settings;
 import game.view.Render;
 public class Grass extends Creature{
     // должно быть множество: еда, из за хп

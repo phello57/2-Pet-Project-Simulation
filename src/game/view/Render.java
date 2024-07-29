@@ -12,9 +12,14 @@ public class Render {
     public static final String EMOJI_PIG = "\uD83D\uDC37";
     public static final String EMOJI_VOID = ". ";
 
+    private GameMap world;
 
-    public static void printMap(GameMap pMap) {
-        Node[][] map = pMap.getGAME_MAP();
+    public Render(GameMap world) {
+        this.world = world;
+    }
+    public void printMap() {
+        Node[][] map = world.getGAME_MAP();
+
         for (int w = 0; w < map.length; w++) {
             System.out.println();
             for (int l = 0; l < map[0].length; l++) {

@@ -5,7 +5,6 @@ import game.model.game_entities.GameMap;
 
 public class ServiceGetRandomEmptyNode {
     public static Node get(GameMap world) {
-        Node node = null;
         int w = 0;
         int l = 0;
         while (true) {
