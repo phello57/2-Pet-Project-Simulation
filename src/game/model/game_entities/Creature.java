@@ -19,7 +19,7 @@ abstract public class Creature extends Entity{
      protected int attackPoints;
 
 
-     protected HashSet<String> arrGoals = new HashSet<>();
+     protected final HashSet<String> arrGoals = new HashSet<>();
      protected PathNode currentGoal; // цепочка оберток начиная с цели, которая приводит к this
 
      public HashSet<String> getArrGoals() {return arrGoals;}

@@ -9,7 +9,6 @@ public abstract class Entity {
     protected String emoji;
 
     public String getEmoji() {return emoji;}
-    public void setEmoji(String emoji) {this.emoji = emoji;}
 
     public Node getCurNode() {return curNode;}
     public void setCurNode(Node curNode) {this.curNode = curNode;}

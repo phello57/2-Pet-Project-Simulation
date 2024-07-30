@@ -1,7 +1,7 @@
 package game.model.BFS;
 
 public class PathNode {
-    private Node node;
+    private final Node node;
     private PathNode pathNode;
 
     public Node getNode() {

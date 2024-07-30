@@ -12,7 +12,7 @@ public class Render {
     public static final String EMOJI_PIG = "\uD83D\uDC37";
     public static final String EMOJI_VOID = ". ";
 
-    private GameMap world;
+    private final GameMap world;
 
     public Render(GameMap world) {
         this.world = world;

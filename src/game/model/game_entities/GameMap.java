@@ -18,7 +18,7 @@ public class GameMap {
 
     private final Node[][] GAME_MAP;
 
-    private HashSet<Entity> entitiesWithHP = new HashSet<>();
+    private final HashSet<Entity> entitiesWithHP = new HashSet<>();
 
     public HashSet<Entity> getSetEntitiesWithHP() {return entitiesWithHP;}
 

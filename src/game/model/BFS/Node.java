@@ -3,7 +3,7 @@ package game.model.BFS;
 import game.model.game_entities.Entity;
 
 import java.util.LinkedHashSet;
-import game.view.Render;
+
 public class Node {
 
     private Entity entity;
